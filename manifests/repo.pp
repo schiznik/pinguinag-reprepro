@@ -1,3 +1,4 @@
+# Sets up a repository, including autosigning
 define reprepro::repo (
   String $architectures,
   String $codename,
@@ -8,6 +9,7 @@ define reprepro::repo (
   String $label,
   String $origin,
   String $public_key,
+  String $signing_user       = lookup('reprepro::signing_user'),
   Boolean $manage_web_server = lookup('reprepro::manage_web_server'),
   String $main_folder        = lookup('reprepro::main-folder'),
   String $www_group          = lookup('reprepro::www_group'),
@@ -52,8 +54,9 @@ define reprepro::repo (
   }
   cron { "sign incoming packages for ${title}":
     ensure  => present,
-    command => "for file in ${main_folder}/${title}/${dist}/incoming; do reprepro includedeb -b ${main_folder}/${title}/${dist} ${codename} $file; done",
-    user    => $www_user,
+    command => "for file in ${main_folder}/${title}/${dist}/incoming; do /usr/bin/reprepro includedeb -b ${main_folder}/${title}/${dist} ${codename} $file; done \
+    && /bin/chown -R ${www_user}:${www_group} ${main_folder}/${title}/${dist}",
+    user    => $signing_user,
     minute  => '*/5',
   }
 }

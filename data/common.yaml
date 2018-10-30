@@ -1,5 +1,6 @@
 ---
 reprepro::main_folder: '/var/www/reprepro'
 reprepro::manage_web_server: true
+reprepro::signing_user: 'root'
 reprepro::www_group: 'www-data'
 reprepro::www_user: 'www-data'
