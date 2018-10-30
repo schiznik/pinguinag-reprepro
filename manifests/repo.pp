@@ -11,7 +11,7 @@ define reprepro::repo (
   String $public_key,
   String $signing_user       = lookup('reprepro::signing_user'),
   Boolean $manage_web_server = lookup('reprepro::manage_web_server'),
-  String $main_folder        = lookup('reprepro::main-folder'),
+  String $main_folder        = lookup('reprepro::main_folder'),
   String $www_group          = lookup('reprepro::www_group'),
   String $www_user           = lookup('reprepro::www_user'),
 ) {
@@ -43,12 +43,6 @@ define reprepro::repo (
   file { "${main_folder}/${title}/${dist}/pubkey.gpg":
     ensure  => present,
     content => $public_key,
-    group   => $www_group,
-    owner   => $www_user,
-  }
-  file { "${main_folder}/${title}/${dist}/sources.list":
-    ensure  => present,
-    content => template('reprepro/sources.list.erb'),
     group   => $www_group,
     owner   => $www_user,
   }
