@@ -26,13 +26,18 @@ define reprepro::repo (
   $folders = [
     "${main_folder}/${title}",
     "${main_folder}/${title}/${dist}",
-    "${main_folder}/${title}/${dist}/conf",
-    "${main_folder}/${title}/${dist}/incoming",
+    "${main_folder}/${title}/${dist}/conf"
   ]
   file { $folders:
-    ensure  => directory,
-    owner   => $www_user,
-    group   => $www_group,
+    ensure => directory,
+    owner  => $www_user,
+    group  => $www_group,
+  }
+  file { "${main_folder}/${title}/${dist}/incoming":
+    ensure => directory,
+    owner  => $www_user,
+    group  => $www_group,
+    mode   => '0775'
   }
   file { "${main_folder}/${title}/${dist}/conf/distributions":
     ensure  => present,
@@ -48,7 +53,7 @@ define reprepro::repo (
   }
   cron { "sign incoming packages for ${title}":
     ensure  => present,
-    command => "for file in ${main_folder}/${title}/${dist}/incoming; do /usr/bin/reprepro includedeb -b ${main_folder}/${title}/${dist} ${codename} $file; done \
+    command => "for file in ${main_folder}/${title}/${dist}/incoming/*; do /usr/bin/reprepro -b ${main_folder}/${title}/${dist}/ includedeb ${codename} \$file; done \
     && /bin/chown -R ${www_user}:${www_group} ${main_folder}/${title}/${dist}",
     user    => $signing_user,
     minute  => '*/5',
