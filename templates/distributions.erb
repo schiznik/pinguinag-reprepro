@@ -2,6 +2,6 @@ Origin: <%= @origin %>
 Label: <%= @label %>
 Codename: <%= @codename %>
 Architectures: <%= @architectures %>
-Components: <%= @components %>
+Components: <% @components.each do | component | %> <%= component %><% end %>
 Description: <%= @description %>
 SignWith: <%= @key_id %>
