@@ -1,18 +1,25 @@
 {
   "name": "pinguinag-reprepro",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "pinguinag",
-  "summary": "",
+  "summary": "Set up APT repositories with autosigning of packages",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/ag-pinguin/pinguinag-reprepro",
+  "project_page": "https://github.com/ag-pinguin/pinguinag-reprepro",
+  "issues_url": "https://github.com/ag-pinguin/pinguinag-reprepro",
   "dependencies": [
-
+    {
+      "name": "puppetlabs/apache",
+      "version_requirement": ">= 3.0.0 < 4.0.0"
+    }
   ],
+  "data_provider": "hiera",
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "8"
+        "8",
+        "9"
       ]
     },
     {
