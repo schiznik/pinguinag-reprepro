@@ -1,7 +1,7 @@
-<% @codenames.each do | @codename | %>
-Origin: <%= @origin %
+<% @codenames.each do | codename | -%>
+Origin: <%= @origin %>
 Label: <%= @label %>
-Codename: <%= @codename %>
+Codename: <%= codename %>
 Architectures: <%= @architectures %>
 Components: <% @components.each do | component | %> <%= component %><% end %>
 Description: <%= @description %>

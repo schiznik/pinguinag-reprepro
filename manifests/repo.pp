@@ -30,32 +30,32 @@ define reprepro::repo (
       "${main_folder}/${title}/${dist}",
       "${main_folder}/${title}/${dist}/conf"
     ]
-    $cronfolder = "${main_folder}/${title}/${dist}"
+    $repofolder = "${main_folder}/${title}/${dist}"
   } else {
     $folders = [
       "${main_folder}/${dist}",
       "${main_folder}/${dist}/conf"
-
-    $cronfolder = "${main_folder}/${dist}"
+    ]
+    $repofolder = "${main_folder}/${dist}"
   }
   file { $folders:
     ensure => directory,
     owner  => $www_user,
     group  => $www_group,
   }
-  file { "${main_folder}/${title}/${dist}/incoming":
+  file { "${repofolder}/incoming":
     ensure => directory,
     owner  => $www_user,
     group  => $www_group,
     mode   => '0775'
   }
-  file { "${main_folder}/${title}/${dist}/conf/distributions":
+  file { "${repofolder}/conf/distributions":
     ensure  => present,
     content => template('reprepro/distributions.erb'),
     group   => $www_group,
     owner   => $www_user,
   }
-  file { "${main_folder}/${title}/${dist}/pubkey.gpg":
+  file { "${repofolder}/pubkey.gpg":
     ensure  => present,
     content => $public_key,
     group   => $www_group,
@@ -63,8 +63,8 @@ define reprepro::repo (
   }
   cron { "sign incoming packages for ${title}":
     ensure  => present,
-    command => "for file in ${cronfolder}/incoming/*; do /usr/bin/reprepro -b ${cronfolder}/ includedeb ${codename} \$file; done \
-    && /bin/chown -R ${www_user}:${www_group} ${cronfolder}",
+    command => "for file in ${repofolder}/incoming/*; do /usr/bin/reprepro -b ${repofolder}/ includedeb ${codename} \$file; done \
+    && /bin/chown -R ${www_user}:${www_group} ${repofolder}",
     user    => $signing_user,
     minute  => '*/5',
   }
