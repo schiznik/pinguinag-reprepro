@@ -1,6 +1,6 @@
 {
   "name": "pinguinag-reprepro",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "pinguinag",
   "summary": "Set up APT repositories with autosigning of packages",
   "license": "Apache-2.0",

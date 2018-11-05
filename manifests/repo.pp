@@ -61,11 +61,13 @@ define reprepro::repo (
     group   => $www_group,
     owner   => $www_user,
   }
-  cron { "sign incoming packages for ${title}":
-    ensure  => present,
-    command => "for file in ${repofolder}/incoming/*; do /usr/bin/reprepro -b ${repofolder}/ includedeb ${codename} \$file; done \
-    && /bin/chown -R ${www_user}:${www_group} ${repofolder}",
-    user    => $signing_user,
-    minute  => '*/5',
+  $codenames.each | $codename | {
+    cron { "sign incoming packages for ${title}":
+      ensure  => present,
+      command => "for file in ${repofolder}/incoming/*; do /usr/bin/reprepro -b ${repofolder}/ includedeb ${codename} \$file; done \
+      && /bin/chown -R ${www_user}:${www_group} ${repofolder}",
+      user    => $signing_user,
+      minute  => '*/5',
+    }
   }
 }

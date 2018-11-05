@@ -1,23 +1,21 @@
 # /etc/apache2/conf.d/repos
-
-<Directory "/var/www/repos/<%= @title %>/">
-        # We want the user to be able to browse the directory manually
+<Directory "<%= @mainfolder %>">
         Options Indexes FollowSymLinks Multiviews
         Order allow,deny
         Allow from all
 </Directory>
 
-<Directory "/var/www/repos/<%= @title %>/<%= @dist %>/db/">
+<Directory "<%= @repofolder %>/db/">
         Order deny,allow
         Deny from all
 </Directory>
 
-<Directory "/var/www/repos/<%= @title %>/<%= @dist %>/conf/">
+<Directory "<%= @repofolder %>/conf/">
         Order deny,allow
         Deny from all
 </Directory>
 
-<Directory "/var/www/repos/<%= @title %>/<%= @dist %>/incoming/">
+<Directory "<%= @repofolder %>/incoming/">
         Order allow,deny
         Deny from all
 </Directory>
