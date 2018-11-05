@@ -1,6 +1,6 @@
 {
   "name": "pinguinag-reprepro",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "pinguinag",
   "summary": "Set up APT repositories with autosigning of packages",
   "license": "Apache-2.0",
@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/apache",
-      "version_requirement": ">= 3.0.0 < 4.0.0"
+      "version_requirement": ">= 2.0.0 < 4.0.0"
     }
   ],
   "data_provider": "hiera",
