@@ -64,19 +64,32 @@ class { 'reprepro':
 }
 
 reprepro::repo { 'my-first-repository':
-  architectures     => 'amd64',
-  codename          => 'stretch',
-  components        => ['main', 'sources'],
-  description       => 'my first repo',
-  dist              => 'debian',
-  key_id            => $key_id,
-  label             => 'apt.example.com',
-  origin            => 'apt.example.com',
-  public_key        => file('.../pub.gpg'),
-  signing_user      => root,                  # this user needs the gpg key
-  manage_web_server => true,
-  main_folder       => '/var/www/reprepro',
-  www_group         => 'www-data',
-  www_user          => 'www-data'
+  architectures       => 'amd64',
+  codenames           => ['stretch', 'sid']
+  components          => ['main', 'sources'],
+  description         => 'my first repo',
+  dist                => 'debian',
+  folder_per_resource => true,
+  key_id              => $key_id,
+  label               => 'apt.example.com',
+  origin              => 'apt.example.com',
+  public_key          => file('.../pub.gpg'),
+  signing_user        => root, # this user needs the gpg key
+  manage_web_server   => true,
+  main_folder         => '/var/www/reprepro',
+  www_group           => 'www-data',
+  www_user            => 'www-data'
 }
 ```
+
+This creates a folder structure like this:
+${main_folder}/${title}/${dist}
+
+By setting folder_per_resource to false, it will instead create this:
+${main_folder}/${dist}
+
+## Breaking changes:
+
+1.1.0:
+
+codename is now codenameS, and an array.
