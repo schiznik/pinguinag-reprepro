@@ -62,7 +62,7 @@ define reprepro::repo (
     owner   => $www_user,
   }
   $codenames.each | $codename | {
-    cron { "sign incoming packages for ${title}":
+    cron { "sign incoming packages for ${title}-${codename}":
       ensure  => present,
       command => "for file in ${repofolder}/incoming/*; do /usr/bin/reprepro -b ${repofolder}/ includedeb ${codename} \$file; done \
       && /bin/chown -R ${www_user}:${www_group} ${repofolder}",
