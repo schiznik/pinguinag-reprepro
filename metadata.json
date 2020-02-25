@@ -1,16 +1,16 @@
 {
-  "name": "pinguinag-reprepro",
+  "name": "schiznik-reprepro",
   "version": "1.1.1",
-  "author": "pinguinag",
+  "author": "schiznik",
   "summary": "Set up APT repositories with autosigning of packages",
   "license": "Apache-2.0",
-  "source": "https://github.com/ag-pinguin/pinguinag-reprepro",
-  "project_page": "https://github.com/ag-pinguin/pinguinag-reprepro",
-  "issues_url": "https://github.com/ag-pinguin/pinguinag-reprepro",
+  "source": "https://github.com/schiznik/pinguinag-reprepro",
+  "project_page": "https://github.com/schiznik/pinguinag-reprepro",
+  "issues_url": "https://github.com/schiznik/pinguinag-reprepro",
   "dependencies": [
     {
       "name": "puppetlabs/apache",
-      "version_requirement": ">= 2.0.0 < 4.0.0"
+      "version_requirement": ">= 2.0.0 < 6.0.0"
     }
   ],
   "data_provider": "hiera",
@@ -19,7 +19,8 @@
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
         "8",
-        "9"
+        "9",
+        "10"
       ]
     },
     {
@@ -32,7 +33,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.7.0 < 6.0.0"
+      "version_requirement": ">= 4.7.0 < 7.0.0"
     }
   ],
   "pdk-version": "1.7.0",
